@@ -4,13 +4,18 @@
 package Dating.User.System;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.SQLException;
 
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -26,7 +31,7 @@ import Dating.System.Database.Connect;
  *
  */
 @WebServlet("/Login")
-public class Login extends HttpServlet {
+public class Login extends HttpServlet implements Filter {
 
 	/**
 	 * 
@@ -35,7 +40,11 @@ public class Login extends HttpServlet {
 	private String full_name;
 	private String password;
 	public static String mess="";
+	@Override
+    public void init(FilterConfig filterConfig)
+            throws ServletException {
 
+    }
 	private boolean Login(String name, String pass) throws ClassNotFoundException, SQLException {
 		boolean check_login = true;
 		Connection con = Connect.getConnection();
@@ -56,7 +65,10 @@ public class Login extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.setCharacterEncoding("UTF-8");
 		full_name = req.getParameter("name");
+		byte[] bytes = full_name.getBytes(StandardCharsets.ISO_8859_1);
+		full_name = new String(bytes, StandardCharsets.UTF_8);
 		password = req.getParameter("password");
 		System.out.println(full_name + " " + password);
 		try {
@@ -65,6 +77,7 @@ public class Login extends HttpServlet {
 			}
 			else {
 				req.setAttribute("mess", mess);
+				System.out.println(mess);
 			}
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
@@ -72,5 +85,23 @@ public class Login extends HttpServlet {
 		}
 		
 	}
+	protected void doFilterInternal(HttpServletRequest request,
+            HttpServletResponse response, FilterChain filterChain)
+            throws ServletException, IOException {
+        //Set character encoding as UTF-8
+        request.setCharacterEncoding("UTF-8");
+        filterChain.doFilter(request, response);
+    }
+	@Override
+    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
+            throws IOException, ServletException {
+        servletRequest.setCharacterEncoding("UTF-8");
+        servletResponse.setContentType("text/html; charset=UTF-8");
+        filterChain.doFilter(servletRequest, servletResponse);
+    }
 
+    @Override
+    public void destroy() {
+
+    }
 }

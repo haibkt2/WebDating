@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 public class Main extends HttpServlet {
 
 	/**
-	 * 
+	 * x`x
 	 */
 	private static final long serialVersionUID = 1L;
 
@@ -32,6 +32,7 @@ public class Main extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.setCharacterEncoding("UTF-8");
 		req.getRequestDispatcher("./JSP/LoginRegistration.jsp").forward(req, resp);
 	}
 
