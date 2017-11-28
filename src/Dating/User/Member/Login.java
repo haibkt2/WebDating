@@ -65,6 +65,7 @@ public class Login extends HttpServlet  {
 		byte[] bytes = full_name.getBytes(StandardCharsets.ISO_8859_1);
 		full_name = new String(bytes, StandardCharsets.UTF_8);
 		password = req.getParameter("password");
+		System.out.println(full_name + password);
 		req.setAttribute("mess", " ");
 		req.setAttribute("type", " ");
 		try {

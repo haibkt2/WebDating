@@ -11,7 +11,7 @@
 <div id="container">
 		<div id="header" style="background: url('${pageContext.request.contextPath}/images/divider.jpg')">
     		<div id="login_box">
-      			<a href="/LoginRegistration.jsp">Sign up</a> 
+      			<a href="/WebDating/Login_Registration_WebDating">Sign up</a> 
       		</div>
   		</div>
 	 	<div id="menu" style="background: url('${pageContext.request.contextPath}/images/menu_bg.jpg')">
