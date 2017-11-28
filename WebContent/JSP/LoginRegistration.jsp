@@ -10,7 +10,7 @@ response.setCharacterEncoding("UTF-8");
 <title>Chào mừng bạn tới Website Dating.com</title>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/JS/css/style_log.css" />
 </head>
-<body background="${pageContext.request.contextPath}/Images/bg.jpg">
+<body background="${pageContext.request.contextPath}/images_bg/bg.jpg">
 	<div class="login">
 	<form method="post" action="Login">
 		<fieldset>
@@ -19,6 +19,16 @@ response.setCharacterEncoding("UTF-8");
 			<input type="text" id="name" name="name"> 
 			<label for="password">Mật khẩu:</label> 
 			<input type="password" id="password" name="password"> 
+			<i style="color: red">
+			<label for="mess">
+			<%
+			String mess = (String)request.getAttribute("mess");
+			if(mess!=null){
+				out.print(mess);
+			}	
+			
+			%>
+			</label> </i>
 		<button class="sm_login" type="submit">Đăng Nhập</button>
 				</fieldset>
 	</form>

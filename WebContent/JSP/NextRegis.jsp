@@ -7,7 +7,7 @@
 <title>Chào mừng bạn tới Website Dating.com</title>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/JS/css/style_log.css" />
 </head>
-<body background="${pageContext.request.contextPath}/Images/bg.jpg">
+<body background="${pageContext.request.contextPath}/images_bg/bg.jpg">
 	<div class="profile">
 	<form >
 		<fieldset>
@@ -16,7 +16,20 @@
 			</legend>
 			<span class="city">
 				<label for="city">Tỉnh/Thành Phố:</label> 
-				<input type="text" id="city" name="city"> 
+				<select class="dob">
+                  <option>Đà Nẵng</option>
+				  <option>Quảng Bình</option>
+				  <option>Hà Nội</option>
+				  <option>Huế</option>
+				  <option>Quảng Nam</option>
+				  <option>Cần Thơ</option>
+				  <option>TP Hồ Chí Minh</option>
+				  <option>Hà Tĩnh</option>
+				  <option>Hải Phòng</option>
+				  <option>Quảng Quảng</option>
+				  <option>Cà Mau</option>
+				  <option>Cần Thơ</option>
+                </select>
 			</span>
 			<span class="job">
 				<label for="job">Công việc:</label> 

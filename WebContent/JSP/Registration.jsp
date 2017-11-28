@@ -7,7 +7,7 @@
 <title>Chào mừng bạn tới Website Dating.com</title>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/JS/css/style_log.css" />
 </head>
-<body background="${pageContext.request.contextPath}/Images/bg.jpg">
+<body background="${pageContext.request.contextPath}/images_bg/bg.jpg">
 	<div class="infobase">
 	<form >
 	<h1>Đăng ký tài khoản</h1>

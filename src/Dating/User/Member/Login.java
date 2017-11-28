@@ -1,7 +1,7 @@
 /**
  * 
  */
-package Dating.User.System;
+package Dating.User.Member;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -20,7 +20,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import javax.servlet.http.HttpSession;
 
 import Dating.System.Database.Connect;
 
@@ -31,7 +31,7 @@ import Dating.System.Database.Connect;
  *
  */
 @WebServlet("/Login")
-public class Login extends HttpServlet implements Filter {
+public class Login extends HttpServlet  {
 
 	/**
 	 * 
@@ -39,22 +39,17 @@ public class Login extends HttpServlet implements Filter {
 	private static final long serialVersionUID = 1L;
 	private String full_name;
 	private String password;
-	public static String mess="";
-	@Override
-    public void init(FilterConfig filterConfig)
-            throws ServletException {
-
-    }
+	private String type;
 	private boolean Login(String name, String pass) throws ClassNotFoundException, SQLException {
 		boolean check_login = true;
 		Connection con = Connect.getConnection();
-		String sql = "SELECT info_user.full_name FROM info_user WHERE full_name = \""+name+"\" && password = \""+pass+"\" ";
+		String sql = "SELECT user.full_name,user.type FROM user WHERE full_name = \""+name+"\" && password = \""+pass+"\" ";
 		Statement st = con.createStatement();
 		ResultSet rs = st.executeQuery(sql);
 		if(!rs.next()){
 			check_login = false;
-			mess="Tên đăng nhập hoặc mật khẩu không đúng";
 		}
+		else type= rs.getString(2);
 		return check_login;
 	}
 
@@ -65,19 +60,26 @@ public class Login extends HttpServlet implements Filter {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.setCharacterEncoding("UTF-8");
+		HttpSession session = req.getSession();
 		full_name = req.getParameter("name");
 		byte[] bytes = full_name.getBytes(StandardCharsets.ISO_8859_1);
 		full_name = new String(bytes, StandardCharsets.UTF_8);
 		password = req.getParameter("password");
-		System.out.println(full_name + " " + password);
+		req.setAttribute("mess", " ");
+		req.setAttribute("type", " ");
 		try {
 			if (Login(full_name, password)) {
-				req.getRequestDispatcher("./JSP/test.jsp").forward(req, resp);
+				if(type.equals("admin")){
+					req.setAttribute("type", "Phân quyền");
+				}
+				req.setAttribute("user_name", full_name);
+				req.getRequestDispatcher("./JSP/Home.jsp").forward(req, resp);
+				session.invalidate();
 			}
 			else {
-				req.setAttribute("mess", mess);
-				System.out.println(mess);
+				req.setAttribute("mess", "Tên đăng nhập hoặc mật khẩu không đúng");
+				req.getRequestDispatcher("./JSP/LoginRegistration.jsp").forward(req, resp);
+				session.invalidate();
 			}
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
@@ -85,23 +87,4 @@ public class Login extends HttpServlet implements Filter {
 		}
 		
 	}
-	protected void doFilterInternal(HttpServletRequest request,
-            HttpServletResponse response, FilterChain filterChain)
-            throws ServletException, IOException {
-        //Set character encoding as UTF-8
-        request.setCharacterEncoding("UTF-8");
-        filterChain.doFilter(request, response);
-    }
-	@Override
-    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
-            throws IOException, ServletException {
-        servletRequest.setCharacterEncoding("UTF-8");
-        servletResponse.setContentType("text/html; charset=UTF-8");
-        filterChain.doFilter(servletRequest, servletResponse);
-    }
-
-    @Override
-    public void destroy() {
-
-    }
 }
