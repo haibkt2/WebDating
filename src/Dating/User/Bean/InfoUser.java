@@ -4,6 +4,7 @@
 package Dating.User.Bean;
 
 import java.util.Date;
+import java.util.Set;
 
 /**
  * 2017/11/21
@@ -24,18 +25,20 @@ public class InfoUser {
 	private String job;
 	private String status;
 	private String introduction;
-	private String residence;
-	private boolean on_off;
+	private int on_off;
 	private String type;
+	private Set<ImageOfUser> mageOfUser;
+	private Set<Message> message;
 
-	public InfoUser(String id_user, String full_name, String password) {
-		this.id_user = id_user;
-		this.full_name = full_name;
-		this.password = password;
+	public InfoUser() {
 	}
 
-	public InfoUser(String weight, String height, Date birthday, String sex, String mail, String religion, String job,
-			String status, String introdution, String residence, boolean on_off, String type) {
+	public InfoUser(String idUser, String full_name, String type, String weight, String height, Date birthday,
+			String sex, String address, String mail, String job, String status, String introdution, int on_off,
+			String religion) {
+		this.id_user = idUser;
+		this.full_name = full_name;
+		this.type = type;
 		this.weight = weight;
 		this.height = height;
 		this.birthday = birthday;
@@ -45,7 +48,6 @@ public class InfoUser {
 		this.job = job;
 		this.status = status;
 		this.introduction = introdution;
-		this.residence = residence;
 		this.on_off = on_off;
 		this.type = type;
 	}
@@ -231,24 +233,9 @@ public class InfoUser {
 	}
 
 	/**
-	 * @return the residence
-	 */
-	public String getResidence() {
-		return residence;
-	}
-
-	/**
-	 * @param residence
-	 *            the residence to set
-	 */
-	public void setResidence(String residence) {
-		this.residence = residence;
-	}
-
-	/**
 	 * @return the on_off
 	 */
-	public boolean isOn_off() {
+	public int isOn_off() {
 		return on_off;
 	}
 
@@ -256,7 +243,7 @@ public class InfoUser {
 	 * @param on_off
 	 *            the on_off to set
 	 */
-	public void setOn_off(boolean on_off) {
+	public void setOn_off(int on_off) {
 		this.on_off = on_off;
 	}
 
@@ -273,6 +260,36 @@ public class InfoUser {
 	 */
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	/**
+	 * @return the mageOfUser
+	 */
+	public Set<ImageOfUser> getMageOfUser() {
+		return mageOfUser;
+	}
+
+	/**
+	 * @param mageOfUser
+	 *            the mageOfUser to set
+	 */
+	public void setMageOfUser(Set<ImageOfUser> mageOfUser) {
+		this.mageOfUser = mageOfUser;
+	}
+
+	/**
+	 * @return the message
+	 */
+	public Set<Message> getMessage() {
+		return message;
+	}
+
+	/**
+	 * @param message
+	 *            the message to set
+	 */
+	public void setMessage(Set<Message> message) {
+		this.message = message;
 	}
 
 }

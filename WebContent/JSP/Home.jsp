@@ -1,5 +1,8 @@
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+<%@ page import="java.util.List" %>
+<%@ page import="Dating.User.Bean.InfoUser" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -8,25 +11,25 @@
 <title>Chào mừng bạn đã tới với Website Dating.com</title>
 </head>
 <body>
+		<%
+				InfoUser infoUser = (InfoUser) request.getAttribute("infoUser");	
+		%>
 <div id="container">
+		
 		<div id="header" style="background: url('${pageContext.request.contextPath}/images/divider.jpg')">
     		<div id="login_box">
-      			<a href="/WebDating/Login_Registration_WebDating">Sign up</a> 
+      			<a href="LogOut?idUser=<%=infoUser.getId_user()%>">Log Out</a> 
       		</div>
   		</div>
 	 	<div id="menu" style="background: url('${pageContext.request.contextPath}/images/menu_bg.jpg')">
     		<ul>
       			<li><a href="#" class="current">Trang Chủ</a></li>
-      			<%
-      			String user_name = (String)request.getAttribute("user_name");
-      			String type = (String)request.getAttribute("type");
-      			%>
-      			<li><a href="#"><%=user_name %></a></li>
+      			<li><a href="#"><%=infoUser.getFull_name()%></a></li>
       			<li><a href="#">Cuộc trò chuyện</a></li>
       			<li><a href="#">Đọc tin</a></li>
       			<li><a href="#">Bạn bè</a></li>
       			<li><a href="#">Về chúng tôi</a></li>
-      			<li><a href="#"><%=type%></a></li>
+      			<li><a href="#"><% if(infoUser.getType().equals("admin"))%><%="Phân Quyền"%><%; %></a></li>
     		</ul>
   	</div>
   	<div id="content">
