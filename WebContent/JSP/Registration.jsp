@@ -185,7 +185,6 @@
 										<option value="1907">1907</option>
 										<option value="1906">1906</option>
 										<option value="1905">1905</option></select>
-				</select>
 			</span> 
 			<label>Giới tính:</label> 
 			<span class="sex">
