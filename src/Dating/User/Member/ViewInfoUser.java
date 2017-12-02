@@ -77,12 +77,6 @@ public class ViewInfoUser extends HttpServlet {
 		return infoUser;
 	}
 
-	public void ChangeOnOff(String id_user, int on_off) throws SQLException, ClassNotFoundException {
-		String sql = "UPDATE info_user SET on_off = " + on_off + " WHERE id_user =\"" + id_user + "\" ";
-		Connection con = Connect.getConnection();
-		Statement st = con.createStatement();
-		st.executeUpdate(sql);
-	}
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -98,26 +92,15 @@ public class ViewInfoUser extends HttpServlet {
 			e1.printStackTrace();
 		}
 		HttpSession session = req.getSession();
-		full_name = req.getParameter("name");
-		password = req.getParameter("password");
+		full_name = req.getParameter("InfoName");
 		req.setAttribute("mess", " ");
 		req.setAttribute("type", " ");
 		try {
-				ChangeOnOff(id_user, on);
 				InfoUser infoUser = LoadDbUser(full_name);
-				System.out.println(1);
-				System.out.println(2);
 				req.setAttribute("infoUser", infoUser);
-				req.setAttribute("user_name_login", full_name);
-				req.setAttribute("user_type_login", type);
-				req.getRequestDispatcher("./JSP/Home.jsp").forward(req, resp);
-				req.setAttribute("mess", "Tên đăng nhập hoặc mật khẩu không đúng");
-				req.getRequestDispatcher("./JSP/LoginRegistration.jsp").forward(req, resp);
+				req.getRequestDispatcher("./JSP/ViewInfoUserMe.jsp").forward(req, resp);
 				session.invalidate();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

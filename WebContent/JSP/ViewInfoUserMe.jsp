@@ -12,34 +12,126 @@
 </head>
 <body>
 		<%
-			String user_name_login = (String)request.getAttribute("user_name_login");	
-			String user_id_login = (String)request.getAttribute("user_id_login");	
-			String user_type_login = (String)request.getAttribute("user_type_login");	
+		InfoUser infoOfMe = (InfoUser) request.getAttribute("infoUser");
 		%>
 <div id="container">
 		
 		<div id="header" style="background: url('${pageContext.request.contextPath}/images/divider.jpg')">
     		<div id="login_box">
-      			<a href="LogOut?idUser=<%=user_id_login%>">Log Out</a> 
+      			<a href="LogOut?idUser=<%=infoOfMe.getId_user()%>">Log Out</a> 
       		</div>
   		</div>
 	 	<div id="menu" style="background: url('${pageContext.request.contextPath}/images/menu_bg.jpg')">
     		<ul>
       			<li><a href="#" class="current">Trang Chủ</a></li>
-      			<li><a href="ViewInfoUser?InfoName=<%=user_name_login%>"><%=user_name_login%></a></li>
+      			<li><a href="#"><%=infoOfMe.getFull_name()%></a></li>
       			<li><a href="#">Cuộc trò chuyện</a></li>
       			<li><a href="#">Đọc tin</a></li>
       			<li><a href="#">Bạn bè</a></li>
       			<li><a href="#">Về chúng tôi</a></li>
-      			<li><a href="#"><% if(user_type_login.equals("admin"))%><%="Phân Quyền"%><%; %></a></li>
+      			<li><a href="#"><% if(infoOfMe.getType().equals("admin"))%><%="Phân Quyền"%><%; %></a></li>
     		</ul>
   	</div>
   	<div id="content">
     <div id="content_left">
       <div class="content_left_section_01">
         <div class="welcome_title" style="background: url('./images/welcome_title.jpg') no-repeat;"></div>
-    	   <p> The <strong>Dating Agency</strong> web template is provided by TemplateMo.com. You may download, edit and use this template layout for your websites. Credit goes to Photovaco.com for photos used in this template. </p>
-           <p> Nulla et nunc commodo ante ornare imperdiet. Donec nunc neque, pulvinar a, vestibulum eget, luctus id, orci. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum enim a augue. Donec in nisi. </p>
+    	 <p>
+    	 	<span class = "show_info_colomn1">
+    	 		Tên đăng nhập
+    	 	</span>
+    	 	<span class = "show_info_colomn2">
+    	 		<strong>&nbsp<%=infoOfMe.getFull_name()%> </strong>
+    	 	</span>
+    	 </p>
+    	 <p>
+    	 	<span class = "show_info_colomn1">
+    	 		Ngày sinh
+    	 	</span>
+    	 	<span class = "show_info_colomn2">
+    	 		<strong>&nbsp<%=infoOfMe.getBirthday()%> </strong>
+    	 	</span>
+    	 </p>
+    	 <p>
+    	 	<span class = "show_info_colomn1">
+    	 		Giới tính
+    	 	</span>
+    	 	<span class = "show_info_colomn2">
+    	 		<strong>&nbsp<%=infoOfMe.getSex()%> </strong>
+    	 	</span>
+    	 </p>
+    	 <p>
+    	 	<span class = "show_info_colomn1">
+    	 		Địa chỉ
+    	 	</span>
+    	 	<span class = "show_info_colomn2">
+    	 		<strong>&nbsp<%=infoOfMe.getAddress()%> </strong>
+    	 	</span>
+    	 </p>
+    	 <p>
+    	 	<span class = "show_info_colomn1">
+    	 		Email
+    	 	</span>
+    	 	<span class = "show_info_colomn2">
+    	 		<strong>&nbsp<%=infoOfMe.getMail()%> </strong>
+    	 	</span>
+    	 </p>
+    	 <p>
+    	 	<span class = "show_info_colomn1">
+    	 		Công việc
+    	 	</span>
+    	 	<span class = "show_info_colomn2">
+    	 		<strong>&nbsp<%=infoOfMe.getJob()%> </strong>
+    	 	</span>
+    	 </p>
+    	 <p>
+    	 	<span class = "show_info_colomn1">
+    	 		Tôn giáo
+    	 	</span>
+    	 	<span class = "show_info_colomn2">
+    	 		<strong>&nbsp<%=infoOfMe.getReligion()%> </strong>
+    	 	</span>
+    	 </p>
+    	     	 <p>
+    	 	<span class = "show_info_colomn1">
+    	 		Châm ngôn tình yêu
+    	 	</span>
+    	 	<span class = "show_info_colomn2">
+    	 		<strong>&nbsp<%=infoOfMe.getStatus()%> </strong>
+    	 	</span>
+    	 </p>
+    	 <p>
+    	 	<span class = "show_info_colomn1">
+    	 		Giới thiệu về bạn thân
+    	 	</span>
+    	 	<span class = "show_info_colomn2">
+    	 		<strong>&nbsp<%=infoOfMe.getIntroduction()%> </strong>
+    	 	</span>
+    	 </p>
+    	 <p>
+    	 	<span class = "show_info_colomn1">
+    	 		Hiện tại
+    	 	</span>
+    	 	<span class = "show_info_colomn2">
+    	 		<strong>&nbsp
+    	 			<%
+    	 			if(infoOfMe.getOn_off()==1) {
+    	 			%>	
+    	 				<i style="color: #2eb82e"> <%="Online"%> </i>
+    	 			
+    	 			<% }else  %><%="Offline" %>
+    	 			
+    	 		</strong>
+    	 	</span>
+    	 </p>
+    	 <p>
+    	 	<span class = "show_info_colomn1">
+    	 	</span>
+    	 	<span class = "show_info_colomn2">
+    	 		<a href="./JSP/Registration.jsp"><i class = "fix_info">Chỉnh sửa thông tin cá nhân</i></a>
+    	 	</span>
+    	 </p>
+  
       </div>
       <div class="cleaner_with_divider">&nbsp;</div>
       <div class="content_left_section_02">

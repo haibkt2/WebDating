@@ -225,7 +225,18 @@ img {
 	float: right;	
 	width: 310px;
 }
-
+.show_info_colomn1{
+	width: 30%;
+	float: left;
+}
+.show_info_column2{
+	width: 50%;
+	float: right;
+}
+.show_info_colomn2 .fix_info{
+	width: 40%;
+	float: right;
+}
 #content_right #templatmeo_quick_search {
 	clear: both;
 	position: relative;

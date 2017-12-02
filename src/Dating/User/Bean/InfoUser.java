@@ -27,6 +27,7 @@ public class InfoUser {
 	private String introduction;
 	private int on_off;
 	private String type;
+	private String address;
 	private Set<ImageOfUser> mageOfUser;
 	private Set<Message> message;
 
@@ -50,6 +51,7 @@ public class InfoUser {
 		this.introduction = introdution;
 		this.on_off = on_off;
 		this.type = type;
+		this.address = address;
 	}
 
 	/**
@@ -108,8 +110,30 @@ public class InfoUser {
 	 * @param weight
 	 *            the weight to set
 	 */
+	
 	public void setWeight(String weight) {
 		this.weight = weight;
+	}
+
+	/**
+	 * @return the address
+	 */
+	public String getAddress() {
+		return address;
+	}
+
+	/**
+	 * @param address the address to set
+	 */
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	/**
+	 * @return the on_off
+	 */
+	public int getOn_off() {
+		return on_off;
 	}
 
 	/**

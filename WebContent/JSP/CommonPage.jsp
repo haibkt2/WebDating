@@ -15,6 +15,8 @@
 			String user_name_login = (String)request.getAttribute("user_name_login");	
 			String user_id_login = (String)request.getAttribute("user_id_login");	
 			String user_type_login = (String)request.getAttribute("user_type_login");	
+			String action_view_me = (String) request.getAttribute("action_view_me");
+			String action_view_other = (String) request.getAttribute("action_view_other");
 		%>
 <div id="container">
 		
@@ -26,7 +28,7 @@
 	 	<div id="menu" style="background: url('${pageContext.request.contextPath}/images/menu_bg.jpg')">
     		<ul>
       			<li><a href="#" class="current">Trang Chủ</a></li>
-      			<li><a href="ViewInfoUser?InfoName=<%=user_name_login%>"><%=user_name_login%></a></li>
+      			<li><a href="#"><%=user_name_login%></a></li>
       			<li><a href="#">Cuộc trò chuyện</a></li>
       			<li><a href="#">Đọc tin</a></li>
       			<li><a href="#">Bạn bè</a></li>
@@ -38,8 +40,15 @@
     <div id="content_left">
       <div class="content_left_section_01">
         <div class="welcome_title" style="background: url('./images/welcome_title.jpg') no-repeat;"></div>
+        <%	String action_login = (String) request.getAttribute("action_user");
+        	String action_view = "ViewInfoUserO" ;
+        	if(action_view.equals("ViewInfoUserO")) {
+        %>
+       <%}if(action_login.equals("UserLogin")) {%>
     	   <p> The <strong>Dating Agency</strong> web template is provided by TemplateMo.com. You may download, edit and use this template layout for your websites. Credit goes to Photovaco.com for photos used in this template. </p>
            <p> Nulla et nunc commodo ante ornare imperdiet. Donec nunc neque, pulvinar a, vestibulum eget, luctus id, orci. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum enim a augue. Donec in nisi. </p>
+         
+     <%   } %>
       </div>
       <div class="cleaner_with_divider">&nbsp;</div>
       <div class="content_left_section_02">

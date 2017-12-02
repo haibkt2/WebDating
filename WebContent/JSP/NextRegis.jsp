@@ -9,17 +9,17 @@
 </head>
 <body background="${pageContext.request.contextPath}/images_bg/bg.jpg">
 	<div class="profile">
-	<form >
+	<form action="${pageContext.request.contextPath}/RegistrationWebDating?action=finishregis" method="post">
 		<fieldset>
 			<legend>
 				<span class="number">2</span>Thêm thông tin về bạn
 			</legend>
 			<span class="city">
 				<label for="city">Tỉnh/Thành Phố:</label> 
-				<select class="dob">
-                  <option>Đà Nẵng</option>
-				  <option>Quảng Bình</option>
-				  <option>Hà Nội</option>
+				<select class="dob" name="city">
+                  <option value="Đà Nẵng">Đà Nẵng</option>
+				  <option value="Đà Nẵng">Quảng Bình</option>
+				  <option value="Đà Nẵng">Hà Nội</option>
 				  <option>Huế</option>
 				  <option>Quảng Nam</option>
 				  <option>Cần Thơ</option>
@@ -35,25 +35,21 @@
 				<label for="job">Công việc:</label> 
 				<input type="text" id="job" name="job"> 
 			</span>
-			
 			<span><label for="status" id = "status">Châm ngôn tình yêu</label></span>
 			<input type="text" id="status" name="status"> 
 			<label for="introduction">Đôi nét về bản thân</label>
 			<textarea id="introdction" name="introduction"></textarea>
 		</fieldset>
-
-		
-	</form>
 	<div>
 		<fieldset>
-			<a href="Registration.jsp">
-				<button class="back" type="submit"> Quay lại</button>
+			<a href="JSP/Registration.jsp">
+				Quay lại
 			</a>
-			<a href="#">
-				<button class="regis" type="submit">Đăng ký</button>
-			</a>
+				<button class="regis" type="submit">Hoàn Tất Đăng ký</button>
 		</fieldset>
 	</div>
+	</form>
 	</div>
+	
 </body>
 </html>

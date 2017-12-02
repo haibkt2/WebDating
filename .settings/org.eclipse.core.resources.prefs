@@ -1,5 +1,8 @@
 eclipse.preferences.version=1
 encoding//WebContent/JSP/Home.jsp=UTF-8
 encoding//WebContent/JSP/LoginRegistration.jsp=UTF-8
+encoding//src/Dating/System/Database/Connect.java=UTF-8
 encoding//src/Dating/User/Member/LogOut.java=UTF-8
 encoding//src/Dating/User/Member/Login.java=UTF-8
+encoding//src/Dating/User/Member/Registration.java=UTF-8
+encoding//src/Dating/User/Member/ViewInfoUser.java=UTF-8

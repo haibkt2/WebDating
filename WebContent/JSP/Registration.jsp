@@ -9,16 +9,16 @@
 </head>
 <body background="${pageContext.request.contextPath}/images_bg/bg.jpg">
 	<div class="infobase">
-	<form >
+	<form action="../RegistrationWebDating?action=nextregis" method="post">
 	<h1>Đăng ký tài khoản</h1>
 		<fieldset>
 			<legend>
 				<span class="number">1</span>Thông tin cơ bản
 			</legend>
 			<label for="name">Tên Đăng Nhập:</label> 
-				<input type="text" id="name" name="user_name"> <label for="password">Mật khẩu:</label> 
-				<input type="password" id="password" name="user_password"> 
-			<label for="mail">Email:</label> <input type="email" id="mail" name="user_email"> 
+				<input type="text" id="name" name="name"> <label for="password">Mật khẩu:</label> 
+				<input type="password" id="password" name="password"> 
+			<label for="mail">Email:</label> <input type="email" id="mail" name="email"> 
 			<span class="birthday"> 
 				<label>Ngày sinh:</label> 
 				<select aria-label="Ngày" name="birthday_day" id="day"title="birthday_day" class="birthday_day">
@@ -55,7 +55,7 @@
 										<option value="30">30</option>
 										<option value="31">31</option>
 				</select> 
-				<select aria-label="Ngày" name="birthday_day" id="day" title="Ngày" class="_5dba">
+				<select aria-label="Ngày" name="birthday_month" id="day" title="month" class="_5dba">
 					<option value="0"selected="1">Tháng</option>
 										<option value="1">Tháng 1</option>
 										<option value="2">Tháng 2</option>
@@ -70,7 +70,7 @@
 										<option value="11" >tháng 11</option>
 										<option value="12">Tháng 12</option>
 				</select> 
-				<select aria-label="Ngày" name="birthday_day" id="day" title="Ngày" class="_5dba">
+				<select aria-label="Ngày" name="birthday_year" id="year" title="year" class="_5dba">
 					<option value="0"selected="1">Năm</option>
 										<option value="2017">2017</option>
 										<option value="2016">2016</option>
@@ -189,26 +189,25 @@
 			</span> 
 			<label>Giới tính:</label> 
 			<span class="sex">
-				<input type="radio" id="woman" value="1"name="sex">
+				<input type="radio" id="woman" value="Nữ" name="sex">
 					<label for="woman" class="light">Nữ</label> 
 				<span class="noshow"></span>
-				<input type="radio" id="man" value="2" name="sex">
+				<input type="radio" id="man" value="Nam" name="sex">
 					<label for="man" class="light">Nam</label>
 			</span>
-
-			
 		</fieldset>
-	</form>
+	
 	<div>	
 		<fieldset>
-		<a href="NextRegis.jsp">
-			<button class="regis">Tiếp tục đăng ký</button>
+		<a >
+			<button class="regis" type="submit">Tiếp tục đăng ký</button>
 		</a>
 		<a href="LoginRegistration.jsp">
 			<button class="back">Đăng nhập</button>
 		</a>
 		</fieldset>		
 	</div>
+	</form>
 	</div>
 </body>
 </html>

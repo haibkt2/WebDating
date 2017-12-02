@@ -15,6 +15,15 @@ response.setCharacterEncoding("UTF-8");
 	<form method="post" action="Login">
 		<fieldset>
 		<h1>Đăng nhập</h1>
+		<i style="color: red">
+		<%
+			String mess_regis = (String)request.getAttribute("mess_regis");
+			if(mess_regis!=null){
+				out.print(mess_regis);
+			}	
+			
+			%>
+			</i>
 			<label for="name">Tên Đăng Nhập:</label> 
 			<input type="text" id="name" name="name"> 
 			<label for="password">Mật khẩu:</label> 

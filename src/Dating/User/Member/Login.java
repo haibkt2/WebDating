@@ -49,34 +49,6 @@ public class Login extends HttpServlet {
 	private int on = 1;
 	private static Connection con;
 	private static Statement st;
-
-	private InfoUser LoadDbUser(String user_name) throws SQLException {
-		InfoUser infoUser = null;
-		String sql = "SELECT user.idUser,user.full_name,user.type, info_user.weight,info_user.height,info_user.birthday,info_user.sex,info_user.address,info_user.mail,info_user.job,info_user.status,info_user.introduction,info_user.on_off,info_user.religion FROM user JOIN info_user ON info_user.id_user = user.idUser WHERE user.full_name=\""
-				+ user_name + "\"";
-		ResultSet rs = st.executeQuery(sql);
-		while (rs.next()) {
-			String idUser = rs.getString(1);
-			String full_name = rs.getString(2);
-			String type = rs.getString(3);
-			String weight = rs.getString(4);
-			String height = rs.getString(5);
-			Date birthday = rs.getDate(6);
-			String sex = rs.getString(7);
-			String address = rs.getString(8);
-			String mail = rs.getString(9);
-			String job = rs.getString(10);
-			String status = rs.getString(11);
-			String introdution = rs.getString(12);
-			int on_off = rs.getInt(13);
-			String religion = rs.getString(14);
-			 infoUser = new InfoUser(idUser, full_name, type, weight, height, birthday, sex, address, mail, job,
-					status, introdution, on_off, religion);
-		}
-		
-		return infoUser;
-	}
-
 	private boolean Login(String name, String pass) throws SQLException {
 		boolean check_login = true;
 		String sql = "SELECT user.idUser,user.type FROM user WHERE full_name = \"" + name + "\" && password = \""
@@ -116,14 +88,17 @@ public class Login extends HttpServlet {
 		full_name = req.getParameter("name");
 		password = req.getParameter("password");
 		req.setAttribute("mess", " ");
-		req.setAttribute("type", " ");
+		req.setAttribute("action_user", " ");
+		req.setAttribute("user_type_login", " ");
 		try {
 			if (Login(full_name, password)) {
 				ChangeOnOff(id_user, on);
-				InfoUser infoUser = LoadDbUser(full_name);
 				System.out.println(1);
 				System.out.println(2);
-				req.setAttribute("infoUser", infoUser);
+				req.setAttribute("action_user", "UserLogin");
+				req.setAttribute("user_id_login", id_user);
+				req.setAttribute("user_name_login", full_name);
+				req.setAttribute("user_type_login", type);
 				req.getRequestDispatcher("./JSP/Home.jsp").forward(req, resp);
 			} else {
 				req.setAttribute("mess", "Tên đăng nhập hoặc mật khẩu không đúng");
