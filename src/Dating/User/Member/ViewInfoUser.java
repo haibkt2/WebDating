@@ -42,11 +42,6 @@ public class ViewInfoUser extends HttpServlet {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private String full_name;
-	private String password;
-	private String type;
-	private String id_user;
-	private int on = 1;
 	private static Connection con;
 	private static Statement st;
 
@@ -70,13 +65,12 @@ public class ViewInfoUser extends HttpServlet {
 			String introdution = rs.getString(12);
 			int on_off = rs.getInt(13);
 			String religion = rs.getString(14);
-			 infoUser = new InfoUser(idUser, full_name, type, weight, height, birthday, sex, address, mail, job,
-					status, introdution, on_off, religion);
+			infoUser = new InfoUser(idUser, full_name, type, weight, height, birthday, sex, address, mail, job, status,
+					introdution, on_off, religion);
 		}
-		
+
 		return infoUser;
 	}
-
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -92,14 +86,27 @@ public class ViewInfoUser extends HttpServlet {
 			e1.printStackTrace();
 		}
 		HttpSession session = req.getSession();
-		full_name = req.getParameter("InfoName");
+		String user_name_login = (String)req.getParameter("user_name_login");	
+		String user_id_login = (String)req.getParameter("user_id_login");	
+		String user_type_login = (String)req.getParameter("user_type_login");
+		String view_info_me = req.getParameter("view_info_me");
 		req.setAttribute("mess", " ");
 		req.setAttribute("type", " ");
 		try {
-				InfoUser infoUser = LoadDbUser(full_name);
+			if (view_info_me.equals("true")) {
+				InfoUser infoUser = LoadDbUser(user_name_login);
 				req.setAttribute("infoUser", infoUser);
-				req.getRequestDispatcher("./JSP/ViewInfoUserMe.jsp").forward(req, resp);
+				req.getRequestDispatcher("./JSP/ViewInfoUser.jsp?user_name_login="+user_name_login+"&&user_id_login="+user_id_login+"&&user_type_login"+user_type_login).forward(req, resp);
 				session.invalidate();
+
+			} else {
+				req.setAttribute("view_other_user", "view_other_user");
+				String search_user_name = (String)req.getParameter("search_user_name");	
+				InfoUser infoUser = LoadDbUser(search_user_name);
+				req.setAttribute("infoUser", infoUser);
+				req.getRequestDispatcher("./JSP/ViewInfoUser.jsp").forward(req, resp);
+				session.invalidate();
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

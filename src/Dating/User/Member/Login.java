@@ -49,17 +49,19 @@ public class Login extends HttpServlet {
 	private int on = 1;
 	private static Connection con;
 	private static Statement st;
+	private String action_to_home;
+
 	private boolean Login(String name, String pass) throws SQLException {
 		boolean check_login = true;
-		String sql = "SELECT user.idUser,user.type FROM user WHERE full_name = \"" + name + "\" && password = \""
-				+ pass + "\" ";
+		String sql = "SELECT user.idUser,user.type FROM user WHERE full_name = \"" + name + "\" && password = \"" + pass
+				+ "\" ";
 		ResultSet rs = st.executeQuery(sql);
 		if (!rs.next()) {
 			check_login = false;
 		} else {
 			id_user = rs.getString(1);
 			type = rs.getString(2);
-			
+
 		}
 		return check_login;
 	}
@@ -78,40 +80,42 @@ public class Login extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		try {
-			con = Connect.getConnection();
-			st = con.createStatement();
-		} catch (ClassNotFoundException | SQLException e1) {
-			e1.printStackTrace();
-		}
 		HttpSession session = req.getSession();
-		full_name = req.getParameter("name");
-		password = req.getParameter("password");
-		req.setAttribute("mess", " ");
-		req.setAttribute("action_user", " ");
-		req.setAttribute("user_type_login", " ");
-		try {
-			if (Login(full_name, password)) {
-				ChangeOnOff(id_user, on);
-				System.out.println(1);
-				System.out.println(2);
-				req.setAttribute("action_user", "UserLogin");
-				req.setAttribute("user_id_login", id_user);
-				req.setAttribute("user_name_login", full_name);
-				req.setAttribute("user_type_login", type);
-				req.getRequestDispatcher("./JSP/Home.jsp").forward(req, resp);
-			} else {
-				req.setAttribute("mess", "Tên đăng nhập hoặc mật khẩu không đúng");
-				req.getRequestDispatcher("./JSP/LoginRegistration.jsp").forward(req, resp);
-				session.invalidate();
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		action_to_home = req.getParameter("action_to_home");
+		if (!action_to_home.equals("Login")) {
+			String name_logged = req.getParameter("user_name_login");
+			String id_logged = req.getParameter("user_id_login");
+			String type_logged = req.getParameter("user_type_login");
+			System.out.println("hi");
+			req.getRequestDispatcher("./JSP/Home.jsp?user_name_login=" + name_logged + "&&user_id_login=" + id_logged
+					+ "&&user_type_login=" + type_logged).forward(req, resp);
+		} else {
+			try {
+				con = Connect.getConnection();
+				st = con.createStatement();
+				full_name = req.getParameter("name");
+				password = req.getParameter("password");
+				System.err.println(action_to_home);
+				if (Login(full_name, password)) {
+					ChangeOnOff(id_user, on);
+					System.out.println(1);
+					System.out.println(2);
+					req.setAttribute("action_user", "UserLogin");
+					req.getRequestDispatcher("./JSP/Home.jsp?user_name_login=" + full_name + "&&user_id_login="
+							+ id_user + "&&user_type_login=" + type).forward(req, resp);
+				} else {
+					req.setAttribute("mess", "Tên đăng nhập hoặc mật khẩu không đúng");
+					req.getRequestDispatcher("./JSP/LoginRegistration.jsp").forward(req, resp);
+				}
 
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		}
 	}
 }

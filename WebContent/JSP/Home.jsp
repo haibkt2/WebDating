@@ -12,9 +12,9 @@
 </head>
 <body>
 		<%
-			String user_name_login = (String)request.getAttribute("user_name_login");	
-			String user_id_login = (String)request.getAttribute("user_id_login");	
-			String user_type_login = (String)request.getAttribute("user_type_login");	
+			String user_name_login = (String)request.getParameter("user_name_login");	
+			String user_id_login = (String)request.getParameter("user_id_login");	
+			String user_type_login = (String)request.getParameter("user_type_login");	
 		%>
 <div id="container">
 		
@@ -26,7 +26,7 @@
 	 	<div id="menu" style="background: url('${pageContext.request.contextPath}/images/menu_bg.jpg')">
     		<ul>
       			<li><a href="#" class="current">Trang Chủ</a></li>
-      			<li><a href="ViewInfoUser?InfoName=<%=user_name_login%>"><%=user_name_login%></a></li>
+      			<li><a href="ViewInfoUser?user_name_login=<%=user_name_login +"&&user_id_login=" + user_id_login+"&&user_type_login="+user_type_login+"&&view_info_me=true"%>"><%=user_name_login%></a></li>
       			<li><a href="#">Cuộc trò chuyện</a></li>
       			<li><a href="#">Đọc tin</a></li>
       			<li><a href="#">Bạn bè</a></li>
@@ -80,7 +80,7 @@
       <div id="templatmeo_quick_search">
         <h1>Tìm Kiếm Thành Viên</h1>
         <div class="form_container">
-	  <form action="#" method="get">
+	  <form action="SearchUserOther?user_name_login=<%=user_name_login%>&&user_type_login=<%=user_type_login%>&&user_id_login=<%=user_id_login %>" method="post">
             <fieldset>
 			<div class="search_row">
               <div class="search_column_1">
@@ -366,7 +366,7 @@
             <div class="search_row last">
               <div class="search_column_1">&nbsp;</div>
               <div class="search_column_2">
-                <input type="button" class="search_btn" value = "Tìm Kiếm" />
+                <input type="submit" class="search_btn" value = "Tìm Kiếm" />
               </div>
             </div>
             </fieldset>

@@ -12,7 +12,7 @@ response.setCharacterEncoding("UTF-8");
 </head>
 <body background="${pageContext.request.contextPath}/images_bg/bg.jpg">
 	<div class="login">
-	<form method="post" action="Login">
+	<form method="post" action="Login?action_to_home=Login">
 		<fieldset>
 		<h1>Đăng nhập</h1>
 		<i style="color: red">

@@ -199,10 +199,10 @@
 	<div>	
 		<fieldset>
 		<a >
-			<button class="regis" type="submit">Tiếp tục đăng ký</button>
+			<button class="regis" >Tiếp tục đăng ký</button>
 		</a>
-		<a href="LoginRegistration.jsp">
-			<button class="back">Đăng nhập</button>
+		<a href="../Login">
+			Quay lại đăng nhập
 		</a>
 		</fieldset>		
 	</div>

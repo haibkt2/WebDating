@@ -55,6 +55,19 @@ public class InfoUser {
 	}
 
 	/**
+	 * @param full_name2
+	 * @param birthday2
+	 * @param address2
+	 * @param status2
+	 */
+	public InfoUser(String full_name, Date birthday, String address, String status) {
+		this.full_name = full_name;
+		this.birthday = birthday;
+		this.address = address;
+		this.status= status;
+	}
+
+	/**
 	 * @return the id_user
 	 */
 	public String getId_user() {

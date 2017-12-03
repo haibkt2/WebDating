@@ -27,8 +27,8 @@ import Dating.User.Bean.*;;
  * @author HaiRBk
  *
  */
-@WebServlet("/SearchUserOther")
-public class SearchUser extends HttpServlet {
+@WebServlet("/ListFriends")
+public class ListFriends extends HttpServlet {
 
 	/**
 	 * 

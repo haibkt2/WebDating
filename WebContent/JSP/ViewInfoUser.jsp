@@ -11,25 +11,23 @@
 <title>Chào mừng bạn đã tới với Website Dating.com</title>
 </head>
 <body>
-<div id="container">
 		<%
-		int size_result_search = (int)request.getAttribute("size_result_search");
-		String result_search = (String)request.getAttribute("result_search");
-		String user_name_login = (String)request.getAttribute("user_name_login");
-		String user_id_login = (String)request.getParameter("user_id_login");
-		System.out.print("user_name_login " +user_name_login);
-		String user_type_login = (String)request.getAttribute("user_type_login");
-		System.out.print("user_type_login " +user_type_login);
+		String user_name_login = (String)request.getParameter("user_name_login");	
+		String user_id_login = (String)request.getParameter("user_id_login");	
+		String user_type_login = (String)request.getParameter("user_type_login");
+		InfoUser infoOfMe = (InfoUser) request.getAttribute("infoUser");
 		%>
+<div id="container">
+		
 		<div id="header" style="background: url('${pageContext.request.contextPath}/images/divider.jpg')">
     		<div id="login_box">
-      			<a href="LogOut?idUser=">Log Out</a> 
+      			<a href="LogOut?idUser=<%=user_id_login%>">Log Out</a> 
       		</div>
   		</div>
 	 	<div id="menu" style="background: url('${pageContext.request.contextPath}/images/menu_bg.jpg')">
     		<ul>
-      			<li><a href="Login?user_name_login=<%=user_name_login+"&&user_id_login="+user_id_login+"&&user_type_login="+user_type_login+"&&action_to_home=back_home"%>" class="current">Trang Chủ</a></li>
-      			<li><a href="ViewInfoUser?user_name_login=<%=user_name_login +"&&user_id_login=" + user_id_login+"&&user_type_login="+user_type_login+"&&view_info_me=true"%>"><%=user_name_login%></a></li>
+      			<li><a href="Login?user_name_login=<%=infoOfMe.getFull_name()+"&&user_id_login="+infoOfMe.getId_user()+"&&user_type_login="+infoOfMe.getType()+"&&action_to_home=back_home"%>" class="current">Trang Chủ</a></li>
+      			<li><a href="#"><%=user_name_login%></a></li>
       			<li><a href="#">Cuộc trò chuyện</a></li>
       			<li><a href="#">Đọc tin</a></li>
       			<li><a href="#">Bạn bè</a></li>
@@ -41,35 +39,149 @@
     <div id="content_left">
       <div class="content_left_section_01">
         <div class="welcome_title" style="background: url('./images/welcome_title.jpg') no-repeat;"></div>
-    	   <p> <strong><%=result_search %></strong> </p>
+    	 <p>
+    	 	<span class = "show_info_colomn1">
+    	 		Tên đăng nhập
+    	 	</span>
+    	 	<span class = "show_info_colomn2">
+    	 		<strong>&nbsp<%=infoOfMe.getFull_name()%> </strong>
+    	 	</span>
+    	 </p>
+    	 <p>
+    	 	<span class = "show_info_colomn1">
+    	 		Ngày sinh
+    	 	</span>
+    	 	<span class = "show_info_colomn2">
+    	 		<strong>&nbsp<%=infoOfMe.getBirthday()%> </strong>
+    	 	</span>
+    	 </p>
+    	 <p>
+    	 	<span class = "show_info_colomn1">
+    	 		Giới tính
+    	 	</span>
+    	 	<span class = "show_info_colomn2">
+    	 		<strong>&nbsp<%=infoOfMe.getSex()%> </strong>
+    	 	</span>
+    	 </p>
+    	 <p>
+    	 	<span class = "show_info_colomn1">
+    	 		Địa chỉ
+    	 	</span>
+    	 	<span class = "show_info_colomn2">
+    	 		<strong>&nbsp<%=infoOfMe.getAddress()%> </strong>
+    	 	</span>
+    	 </p>
+    	 <p>
+    	 	<span class = "show_info_colomn1">
+    	 		Email
+    	 	</span>
+    	 	<span class = "show_info_colomn2">
+    	 		<strong>&nbsp<%=infoOfMe.getMail()%> </strong>
+    	 	</span>
+    	 </p>
+    	 <p>
+    	 	<span class = "show_info_colomn1">
+    	 		Công việc
+    	 	</span>
+    	 	<span class = "show_info_colomn2">
+    	 		<strong>&nbsp<%=infoOfMe.getJob()%> </strong>
+    	 	</span>
+    	 </p>
+    	 <p>
+    	 	<span class = "show_info_colomn1">
+    	 		Tôn giáo
+    	 	</span>
+    	 	<span class = "show_info_colomn2">
+    	 		<strong>&nbsp<%=infoOfMe.getReligion()%> </strong>
+    	 	</span>
+    	 </p>
+    	     	 <p>
+    	 	<span class = "show_info_colomn1">
+    	 		Châm ngôn tình yêu
+    	 	</span>
+    	 	<span class = "show_info_colomn2">
+    	 		<strong>&nbsp<%=infoOfMe.getStatus()%> </strong>
+    	 	</span>
+    	 </p>
+    	 <p>
+    	 	<span class = "show_info_colomn1">
+    	 		Giới thiệu về bạn thân
+    	 	</span>
+    	 	<span class = "show_info_colomn2">
+    	 		<strong>&nbsp<%=infoOfMe.getIntroduction()%> </strong>
+    	 	</span>
+    	 </p>
+    	 <p>
+    	 	<span class = "show_info_colomn1">
+    	 		Hiện tại
+    	 	</span>
+    	 	<span class = "show_info_colomn2">
+    	 		<strong>&nbsp
+    	 			<%
+    	 			if(infoOfMe.getOn_off()==1) {
+    	 			%>	
+    	 				<i style="color: #2eb82e"> <%="Online"%> </i>
+    	 			
+    	 			<% }else  %><%="Offline" %>
+    	 			
+    	 		</strong>
+    	 	</span>
+    	 </p>
+    	 <p>
+    	 	<span class = "show_info_colomn1">
+    	 	</span>
+    	 	<span class = "show_info_colomn2">
+    	 		<%String view_other =(String) request.getParameter("view_info_me");
+    	 			if(view_other.equals("true")) {
+    	 			%>	
+    	 			<a href="./JSP/Registration.jsp"><i class = "fix_info">Chỉnh sửa thông tin cá nhân</i></a>
+    	 			<% }else  {%> 
+    	 			<a href="./JSP/Registration.jsp"><i class = "fix_info">Gửi lời mời kết bạn</i></a>
+    	 		<%}%>
+    	 	</span>
+    	 </p>
+  
       </div>
       <div class="cleaner_with_divider">&nbsp;</div>
       <div class="content_left_section_02">
-         <% if(size_result_search!=0){
-			List<InfoUser> infoUser = (List) request.getAttribute("listSearch");
-		System.out.print("ok");%>
-      <div class="latest_profile_title">Kết quả tìm được .</div>
-			<%for(InfoUser info : infoUser ){%> 
+        <div class="latest_profile_title">Có thể bạn biết ??</div>
         <div class="latest_profile_box"> <img src="${pageContext.request.contextPath}/images/avatar_man.jpg" alt="" />
-          <div class="name"><%=info.getFull_name() %></div>
-          Ngày sinh : <%=info.getBirthday() %><br />
-          Địa chỉ   : <%=info.getAddress() %><br />
-          Châm ngôn tình yêu   : <%=info.getStatus() %><br />
-          <div class="readmore"><a href="ViewInfoUser?user_name_login=<%=user_name_login +"&&user_id_login=" + user_id_login+"&&user_type_login="+user_type_login+"&&view_info_me=false"+"&&search_user_name="+info.getFull_name()%>">Details &raquo;</a></div>
+          <div class="name">Donec a purus vel</div>
+          Age: 18<br />
+          Mauris pede nisl, placerat nec, lobortis vitae.<br />
+          <div class="readmore"><a href="#">Details &raquo;</a></div>
         </div>
         <div class="cleaner_with_width">&nbsp;</div>
-        <span></span> 
-        <% }
-		}%></div>
+        <div class="latest_profile_box"> <img src="${pageContext.request.contextPath}/images/avatar_woman.jpg" alt="" />
+          <div class="name">Sed pellentesque</div>
+          Age: 24<br />
+          Suspendisse ac magna quis est eleifend dictum.<br />
+          <div class="readmore"><a href="#">Details &raquo;</a></div>
+        </div>
+        <div class="cleaner_with_height">&nbsp;</div>
+        <div class="latest_profile_box"> <img src="${pageContext.request.contextPath}/images/avatar_man.jpg" alt="" />
+          <div class="name">Sed justo dolor</div>
+          Age: 22<br />
+          Morbi nec magna pulvinar mi scelerisque posuere.<br />
+          <div class="readmore"><a href="#">Details &raquo;</a></div>
+        </div>
+        <div class="cleaner_with_width">&nbsp;</div>
+        <div class="latest_profile_box"> <img src="${pageContext.request.contextPath}/images/avatar_woman.jpg" alt="" />
+          <div class="name">Quisque ut odio</div>
+          Age: 20<br />
+          Fusce non lacus et lorem ornare interdum.<br />
+          <div class="readmore"><a href="ViewInfoUser?user_name_login=<%=user_name_login +"&&user_id_login=" + user_id_login+"&&user_type_login="+user_type_login+"&&view_info_me=true"%>"><%=user_name_login%></a>Details &raquo;</a></div>
+        </div>
+        <div class="cleaner">&nbsp;</div>
+        <span></span> </div>
       <!-- end of section 2 -->
     </div>
-
     <!-- end of content left -->
     <div id="content_right">
       <div id="templatmeo_quick_search">
         <h1>Tìm Kiếm Thành Viên</h1>
         <div class="form_container">
-	  <form action="SearchUserOther?user_name_login=<%=user_name_login%>&&user_type_login=<%=user_type_login%>" method="post">
+<form action="SearchUserOther?user_name_login=<%=user_name_login%>&&user_type_login=<%=user_type_login%>&&user_id_login=<%=user_id_login %>" method="post">
             <fieldset>
 			<div class="search_row">
               <div class="search_column_1">
@@ -380,6 +492,5 @@
     </div>
   <!-- end of footer -->
 	</div>
-
 </body>
 </html>
